@@ -1,9 +1,13 @@
 const config = require('./app/common/config/app.config.js');
 
 var express = require("express"),
+  https = require("https"),
+  http = require("http"),
+  fs = require('fs'),
   app = express(),
   bodyParser = require("body-parser"),
-  port = process.env.PORT || config.port;
+  httpPort = process.env.HTTPPORT || config.httpPort,
+  httpsPort = process.env.HTTPSPORT || config.httpsPort;
 
 // body parser
 app.use(bodyParser.urlencoded({
@@ -37,9 +41,23 @@ faqCategoryRoutes.routesConfig(app);
 faqSummaryRoutes.routesConfig(app);
 faqTagRoutes.routesConfig(app);
 
-// setting up the server
-var server = app.listen(port, function() {
-  let host = server.address().address
-  let port = server.address().port
+// setting up the http server
+var httpServer = http.createServer(app).listen(httpPort, function() {
+  let host = httpServer.address().address
+  let port = httpServer.address().port
   console.log("Example app listening at http://%s:%s", host, port)
+});
+
+// setting up the https server
+var httpsOptions = {
+    key: fs.readFileSync("certificates/privatekey.pem", "utf8"),
+    cert: fs.readFileSync("certificates/certificate.pem", "utf8")
+}
+
+console.log(httpsOptions.key);
+console.log(httpsOptions.cert);
+var httpsServer = https.createServer(httpsOptions, app).listen(httpsPort, function() {
+  let host = httpsServer.address().address
+  let port = httpsServer.address().port
+  console.log("Example app listening at https://%s:%s", host, port)
 });

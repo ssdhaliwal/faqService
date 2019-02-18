@@ -16,3 +16,16 @@ npm install jsonwebtoken --save
 npm run start
 -- node server.js
 -- grunt watch
+
+===========================================================
+setting up https
+
+-- generate private key
+"C:\Program Files\OpenSSL-Win64\bin\openssl" genrsa -out privatekey.pem 2048
+-- if sending to cert provider, create certificate request (not required for self-signed)
+"C:\Program Files\OpenSSL-Win64\bin\openssl" req -new -key privatekey.pem -out certrequest.csr
+-- (if self-signed) create the cert using the csr, using private key
+"C:\Program Files\OpenSSL-Win64\bin\openssl" x509 -req -days 1024 -in certrequest.csr -signkey privatekey.pem -out certificate.pem
+
+# create DER format crt for iOS Mobile Safari, etc
+openssl x509 -outform der -in all/my-private-root-ca.cert.pem -out client/my-private-root-ca.crt

@@ -1,7 +1,8 @@
 module.exports = {
-    "port": 3080,
+    "httpPort": 3080,
+    "httpsPort": 443,
     "appEndpoint": "http://localhost:3080",
-    "apiEndpoint": "http://localhost:3080",
+    "appEndpointSecure": "https://localhost:443",
     "database": {
       "admin": {
         "user": "admin",
