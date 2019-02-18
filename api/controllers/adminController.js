@@ -38,7 +38,7 @@ exports.addUser = function(request, response) {
     response.send(JSON.stringify({"status": 500, "error": "invalid password", "response": null}));
     return;
   }
-  request.body.permissionLevel = request.body.permissionLevel || 1
+  request.body.permissionLevel = request.body.permissionLevel || 1;
 
   // fix the user password to be encrypted
   let salt = crypto.randomBytes(16).toString("base64");

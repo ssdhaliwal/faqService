@@ -140,9 +140,10 @@ Category.deleteCategory = function deleteCategory(params, result) {
           console.log("CC/M deleteCategory error", error);
           result(null, error);
         } else {
-          console.log("CC/M deleteCategory task", answer);
+          let rowArray = Object.values(JSON.parse(JSON.stringify(answer)));
+          console.log("CC/M deleteCategory task", rowArray);
 
-          result(null, answer);
+          result(null, rowArray[1][0][""]);
         }
       });
   });

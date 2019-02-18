@@ -85,7 +85,7 @@ Admin.deleteUser = function deleteUser(params, result) {
     // check if params were provided
     let sqlParam = [];
     if (params.id) {
-      sqlParam.push("id");
+      sqlParam.push("$!$i$!$d$!$");
       sqlParam.push(params.id);
     } else if (params.firstName && params.lastName) {
       sqlParam.push(params.firstName);
@@ -108,8 +108,10 @@ Admin.deleteUser = function deleteUser(params, result) {
           console.log("Admin/M deleteUser error", error);
           result(null, error);
         } else {
-          console.log("Admin/M deleteUser task", answer);
-          result(null, answer);
+          let rowArray = Object.values(JSON.parse(JSON.stringify(answer)));
+          console.log("Admin/M deleteUser task", rowArray);
+
+          result(null, rowArray[1][0][""]);
         }
       });
   });

@@ -140,9 +140,10 @@ Tag.deleteTag = function deleteTag(params, result) {
           console.log("TC/M deleteTag error", error);
           result(null, error);
         } else {
-          console.log("TC/M deleteTag task", answer);
+          let rowArray = Object.values(JSON.parse(JSON.stringify(answer)));
+          console.log("TC/M deleteTag task", rowArray);
 
-          result(null, answer);
+          result(null, rowArray[1][0][""]);
         }
       });
   });

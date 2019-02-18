@@ -21,6 +21,9 @@
   },
   "homepage": "https://github.com/ssdhaliwal/faqService#readme",
   "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-execute": "^0.2.2",
     "nodemon": "^1.18.10"
   },
   "dependencies": {
