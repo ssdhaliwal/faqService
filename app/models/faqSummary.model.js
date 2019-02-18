@@ -1,5 +1,5 @@
 "user strict";
-var dbFaqPool = require("../common/dbFaq.js");
+const dbFaqPool = require("../common/faq.db.js");
 
 //Category object constructor
 var Summary = function(summary) {

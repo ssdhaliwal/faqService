@@ -1,6 +1,6 @@
 "use strict";
 
-var SummaryTask = require("../models/faqSummaryModel.js");
+const SummaryTask = require("../models/faqSummary.model.js");
 
 exports.getSummary = function(request, response) {
   console.log("SC getSummary initialized");

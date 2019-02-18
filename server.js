@@ -11,9 +11,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-// enabling CORS
+// middlewares - enabling CORS
 app.use(function(req, res, next) {
-  //Enabling CORS
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
@@ -27,13 +26,20 @@ app.use(function(req, res, next) {
   }
 });
 
+// loading the routes
+const adminRoutes = require("./app/routes/admin.routes.js");
+const faqCategoryRoutes = require("./app/routes/faqCategory.routes.js");
+const faqSummaryRoutes = require("./app/routes/faqSummary.routes.js");
+const faqTagRoutes = require("./app/routes/faqTag.routes.js");
+
+adminRoutes.routesConfig(app);
+faqCategoryRoutes.routesConfig(app);
+faqSummaryRoutes.routesConfig(app);
+faqTagRoutes.routesConfig(app);
+
 // setting up the server
 var server = app.listen(port, function() {
-  var host = server.address().address
-  var port = server.address().port
+  let host = server.address().address
+  let port = server.address().port
   console.log("Example app listening at http://%s:%s", host, port)
-})
-
-// loading the routes
-var routes = require("./app/routes/appRoutes");
-routes(app);
+});

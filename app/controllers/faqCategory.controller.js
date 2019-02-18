@@ -1,6 +1,6 @@
 "use strict";
 
-var CategoryTask = require("../models/faqCategoryModel.js");
+const CategoryTask = require("../models/faqCategory.model.js");
 
 exports.getCategory = function(request, response) {
   console.log("CC getCategory initialized");

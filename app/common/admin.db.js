@@ -1,6 +1,6 @@
 "use strict";
-var mysql = require("mysql");
-var config = require("./config/app.config.js")
+const mysql = require("mysql");
+const config = require("./config/app.config.js")
 
 //local mysql db connection
 var dbAdminPool = mysql.createPool({

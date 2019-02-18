@@ -1,5 +1,5 @@
 "user strict";
-var dbAdminPool = require("../common/dbAdmin.js");
+const dbAdminPool = require("../common/admin.db.js");
 
 //Category object constructor
 var Admin = function(admin) {

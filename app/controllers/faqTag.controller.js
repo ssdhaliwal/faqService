@@ -1,6 +1,6 @@
 "use strict";
 
-var TagTask = require("../models/faqTagModel.js");
+const TagTask = require("../models/faqTag.model.js");
 
 exports.getTag = function(request, response) {
   console.log("CC getTag initialized");

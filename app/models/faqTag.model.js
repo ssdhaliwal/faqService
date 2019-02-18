@@ -1,17 +1,17 @@
 "user strict";
-var dbFaqPool = require("../common/dbFaq.js");
+const dbFaqPool = require("../common/faq.db.js");
 
-//Category object constructor
-var Category = function(category) {
-  this.category = category.category;
-  this.status = category.status;
+//Tag object constructor
+var Tag = function(tag) {
+  this.tag = tag.tag;
+  this.status = tag.status;
   this.created_at = new Date();
 };
 
-Category.getCategory = function getCategory(params, result) {
+Tag.getTag = function getTag(params, result) {
   dbFaqPool.getConnection(function(error, connection) {
     if (error) {
-      console.log("dbPool getCategory connection error", error);
+      console.log("dbPool getTag connection error", error);
       throw error;
     }
 
@@ -22,21 +22,21 @@ Category.getCategory = function getCategory(params, result) {
       sqlWhere = " where (id = ?)";
       sqlParam.push(params.id);
     } else if (params.name) {
-      sqlWhere = " where (category like ?)";
+      sqlWhere = " where (tag like ?)";
       sqlParam.push(params.name + "%");
     }
 
     // execute the query and return the resutl
-    connection.query("SELECT id, category, contentCount, dateUpdated from vw_faq_categories" + sqlWhere,
+    connection.query("SELECT id, tag, contentCount, dateUpdated from vw_faq_tags" + sqlWhere,
       sqlParam,
       function(error, answer) {
         connection.release();
 
         if (error) {
-          console.log("CC/M getCategory error", error);
+          console.log("TC/M getTag error", error);
           result(null, error);
         } else {
-          console.log("CC/M getCategory task", answer);
+          console.log("TC/M getTag task", answer);
 
           result(null, answer);
         }
@@ -44,16 +44,16 @@ Category.getCategory = function getCategory(params, result) {
   });
 };
 
-Category.addCategory = function addCategory(params, result) {
+Tag.addTag = function addTag(params, result) {
   dbFaqPool.getConnection(function(error, connection) {
     if (error) {
-      console.log("dbPool addCategory connection error", error);
+      console.log("dbPool addTag connection error", error);
       throw error;
     }
 
     // set procedure and options
     let sqlOptions = {
-      "sql": "call spi_faq_categories(?, @id);select @id as id",
+      "sql": "call spi_faq_tags(?, @id);select @id as id",
       nestTables: true
     };
 
@@ -64,27 +64,27 @@ Category.addCategory = function addCategory(params, result) {
         connection.release();
 
         if (error) {
-          console.log("CC/M addCategory error", error);
+          console.log("TC/M addTag error", error);
           result(null, error);
         } else {
           let rowArray = Object.values(JSON.parse(JSON.stringify(rows)));
-          console.log("CC/M addCategory task", rowArray[1][0][""]);
+          console.log("TC/M addTag task", rowArray[1][0][""]);
           result(null, rowArray[1][0][""]);
         }
       });
   });
 };
 
-Category.renameCategory = function renameCategory(params, result) {
+Tag.renameTag = function renameTag(params, result) {
   dbFaqPool.getConnection(function(error, connection) {
     if (error) {
-      console.log("dbPool renameCategory connection error", error);
+      console.log("dbPool renameTag connection error", error);
       throw error;
     }
 
     // set procedure and options
     let sqlOptions = {
-      "sql": "call spur_faq_categories(?, ?, @count, @id);select @count as count, @id as id",
+      "sql": "call spur_faq_tags(?, ?, @count, @id);select @count as count, @id as id",
       nestTables: true
     };
 
@@ -95,21 +95,21 @@ Category.renameCategory = function renameCategory(params, result) {
         connection.release();
 
         if (error) {
-          console.log("CC/M renameCategory error", error);
+          console.log("TC/M renameTag error", error);
           result(null, error);
         } else {
           let rowArray = Object.values(JSON.parse(JSON.stringify(rows)));
-          console.log("CC/M renameCategory task", rowArray);
+          console.log("TC/M renameTag task", rowArray);
           result(null, rowArray[1][0][""]);
         }
       });
   });
 };
 
-Category.deleteCategory = function deleteCategory(params, result) {
+Tag.deleteTag = function deleteTag(params, result) {
   dbFaqPool.getConnection(function(error, connection) {
     if (error) {
-      console.log("dbPool deleteCategory connection error", error);
+      console.log("dbPool deleteTag connection error", error);
       throw error;
     }
 
@@ -117,10 +117,10 @@ Category.deleteCategory = function deleteCategory(params, result) {
     let sqlQuery = "";
     let sqlParam = [];
     if (params.id) {
-      sqlQuery = "call spd_faq_categories_id(?, @id);select @id as id";
+      sqlQuery = "call spd_faq_tags_id(?, @id);select @id as id";
       sqlParam.push(params.id);
     } else if (params.name) {
-      sqlQuery = "call spd_faq_categories_name(?, @id);select @id as id";
+      sqlQuery = "call spd_faq_tags_name(?, @id);select @id as id";
       sqlParam.push(params.name);
     }
 
@@ -137,11 +137,11 @@ Category.deleteCategory = function deleteCategory(params, result) {
         connection.release();
 
         if (error) {
-          console.log("CC/M deleteCategory error", error);
+          console.log("TC/M deleteTag error", error);
           result(null, error);
         } else {
           let rowArray = Object.values(JSON.parse(JSON.stringify(answer)));
-          console.log("CC/M deleteCategory task", rowArray);
+          console.log("TC/M deleteTag task", rowArray);
 
           result(null, rowArray[1][0][""]);
         }
@@ -149,4 +149,4 @@ Category.deleteCategory = function deleteCategory(params, result) {
   });
 };
 
-module.exports = Category;
+module.exports = Tag;

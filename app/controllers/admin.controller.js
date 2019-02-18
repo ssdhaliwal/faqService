@@ -1,7 +1,7 @@
 "use strict";
 
-var crypto = require("crypto");
-var AdminTask = require("../models/adminModel.js");
+const crypto = require("crypto");
+const AdminTask = require("../models/admin.model.js");
 
 exports.getUser = function(request, response) {
   console.log("Admin getUser initialized");
