@@ -15,10 +15,11 @@ module.exports = {
       }
     },
     "jwt_secret": "myS33!!creeeT",
-    "jwt_expiration_in_seconds": 60,
+    "jwt_expiration_in_seconds": 3600,
     "environment": "dev",
     "permissionLevels": {
         "NORMAL": 1,
+        "MANAGER": 1000,
         "SUPER": 2000,
         "ADMIN": 2048
     }
