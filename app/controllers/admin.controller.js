@@ -44,7 +44,11 @@ exports.doLogin = function(request, response) {
           firstName: rowArray[0].firstName,
           lastName: rowArray[0].lastName,
           email: rowArray[0].email,
-          permissionLevel: rowArray[0].permissionLevel
+          permissionLevel: rowArray[0].permissionLevel,
+          clientIP: request.headers['x-forwarded-for'] ||
+            request.connection.remoteAddress ||
+            request.socket.remoteAddress ||
+            (request.connection.socket ? request.connection.socket.remoteAddress : null)
         };
 
         // generate and attach jwt token
@@ -56,7 +60,9 @@ exports.doLogin = function(request, response) {
         return response.status(200).send(JSON.stringify({
           "response": {
             "auth": true,
-            "token": token
+            "message": {
+              "token": token
+            }
           }
         }));
       } else {
@@ -93,12 +99,24 @@ exports.doTokenCheck = function(request, response) {
 
   // decode the token
   jwt.verify(token, config.jwt_secret, function(error, decoded) {
-    console.log(decoded);
     // if error, exit
     if (error) {
       return response.status(401).send(JSON.stringify({
         "auth": false,
-        "message": "token cannot be verified!"
+        "message": error
+      }));
+    }
+
+    // ensure the ip is same as token
+    console.log(decoded);
+    let clientIP = request.headers['x-forwarded-for'] ||
+      request.connection.remoteAddress ||
+      request.socket.remoteAddress ||
+      (request.connection.socket ? request.connection.socket.remoteAddress : null);
+
+    if (decoded.clientIP !== clientIP) {
+      response.status(424).send(JSON.stringify({
+        "error": "token does not match origin!"
       }));
     }
 
@@ -118,7 +136,9 @@ exports.doTokenCheck = function(request, response) {
         return response.status(200).send(JSON.stringify({
           "response": {
             "auth": true,
-            "token": token
+            "message": {
+              "token": token
+            }
           }
         }));
       } else {

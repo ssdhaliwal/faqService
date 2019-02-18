@@ -9,12 +9,17 @@ exports.checkToken = function(request, response, next) {
   console.log("MW/checkToken initialized");
 
   // check if params were provided
-  let token = request.headers["x-access-token"];
+  let token = request.headers["x-access-token"] || request.headers["authorization"];
   if (!token) {
     return response.status(401).send(JSON.stringify({
       "auth": false,
       "message": "no token provided!"
     }));
+  }
+
+  // fix token for prefix
+  if (token.startsWith("Bearer ")) {
+    token = token.slice(7, token.length);
   }
 
   // decode the token
@@ -23,7 +28,7 @@ exports.checkToken = function(request, response, next) {
     if (error) {
       return response.status(401).send(JSON.stringify({
         "auth": false,
-        "message": "token cannot be verified!"
+        "message": error
       }));
     }
 

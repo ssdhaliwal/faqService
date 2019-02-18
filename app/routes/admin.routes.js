@@ -1,4 +1,7 @@
 "use strict";
+
+const config = require("../common/config/app.config.js");
+
 const authMiddleware = require("../middlewares/authorization.middleware.js");
 const adminService = require("../controllers/admin.controller.js");
 
@@ -11,14 +14,29 @@ exports.routesConfig = function(app) {
 
   app.route("/admin/users")
     .get([authMiddleware.checkToken,
-      authMiddleware.checkPermissionLevel(10),
+      authMiddleware.checkPermissionLevel(config.permissionLevels.SUPER),
       adminService.getUser
     ])
-    .post(adminService.addUser);
+    .post([authMiddleware.checkToken,
+      authMiddleware.checkPermissionLevel(config.permissionLevels.SUPER),
+      adminService.addUser
+    ]);
   app.route("/admin/users/id/:id")
-    .get(adminService.getUser)
-    .delete(adminService.deleteUser);
+    .get([authMiddleware.checkToken,
+      authMiddleware.checkPermissionLevel(config.permissionLevels.SUPER),
+      adminService.getUser
+    ])
+    .delete([authMiddleware.checkToken,
+      authMiddleware.checkPermissionLevel(config.permissionLevels.SUPER),
+      adminService.deleteUser
+    ]);
   app.route("/admin/users/:firstName/:lastName")
-    .get(adminService.getUser)
-    .delete(adminService.deleteUser);
+    .get([authMiddleware.checkToken,
+      authMiddleware.checkPermissionLevel(config.permissionLevels.SUPER),
+      adminService.getUser
+    ])
+    .delete([authMiddleware.checkToken,
+      authMiddleware.checkPermissionLevel(config.permissionLevels.SUPER),
+      adminService.deleteUser
+    ]);
 };
