@@ -45,7 +45,7 @@ delimiter ;
 set delimiter //
 drop procedure if exists spi_admin_user //
 create procedure spi_admin_user (IN i_firstName varchar(50), IN i_lastName varchar(50), 
-	IN i_email varchar(50), IN i_password varchar(50), IN i_permissionLevel varchar(50), 
+	IN i_email varchar(150), IN i_password varchar(256), IN i_permissionLevel int, 
     OUT o_id int)
 begin
 	-- check if exists, else insert

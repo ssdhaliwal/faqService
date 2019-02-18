@@ -34,7 +34,7 @@ Tag.getTag = function getTag(params, result) {
 
         if (error) {
           console.log("TC/M getTag error", error);
-          result(null, error);
+          result(error, nullr);
         } else {
           console.log("TC/M getTag task", answer);
 
@@ -65,7 +65,7 @@ Tag.addTag = function addTag(params, result) {
 
         if (error) {
           console.log("TC/M addTag error", error);
-          result(null, error);
+          result(error, null);
         } else {
           let rowArray = Object.values(JSON.parse(JSON.stringify(rows)));
           console.log("TC/M addTag task", rowArray[1][0][""]);
@@ -96,7 +96,7 @@ Tag.renameTag = function renameTag(params, result) {
 
         if (error) {
           console.log("TC/M renameTag error", error);
-          result(null, error);
+          result(error, null);
         } else {
           let rowArray = Object.values(JSON.parse(JSON.stringify(rows)));
           console.log("TC/M renameTag task", rowArray);
@@ -138,7 +138,7 @@ Tag.deleteTag = function deleteTag(params, result) {
 
         if (error) {
           console.log("TC/M deleteTag error", error);
-          result(null, error);
+          result(error, null);
         } else {
           let rowArray = Object.values(JSON.parse(JSON.stringify(answer)));
           console.log("TC/M deleteTag task", rowArray);

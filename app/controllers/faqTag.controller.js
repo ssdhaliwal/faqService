@@ -10,12 +10,12 @@ exports.getTag = function(request, response) {
     console.log("TC getTag resource", result);
 
     if (error) {
-      response.status(500).send(JSON.stringify({
+      return response.status(500).send(JSON.stringify({
         "error": error
       }));
     }
 
-    response.status(200).send(JSON.stringify({
+    return response.status(200).send(JSON.stringify({
       "response": result
     }));
   });
@@ -35,7 +35,7 @@ exports.addTag = function(request, response) {
         console.log("CC addTag resource", result);
 
         if (error) {
-          response.status(500).send(JSON.stringify({
+          return response.status(500).send(JSON.stringify({
             "error": error
           }));
         }
@@ -46,7 +46,7 @@ exports.addTag = function(request, response) {
 
         // return consolidated result
         if (resultCount === 0) {
-          response.status(200).send(JSON.stringify({
+          return response.status(200).send(JSON.stringify({
             "response": results
           }));
         }
@@ -69,7 +69,7 @@ exports.renameTag = function(request, response) {
         console.log("CC renameTag resource", result);
 
         if (error) {
-          response.status(500).send(JSON.stringify({
+          return response.status(500).send(JSON.stringify({
             "error": error
           }));
         }
@@ -80,7 +80,7 @@ exports.renameTag = function(request, response) {
 
         // return consolidated result
         if (resultCount === 0) {
-          response.status(200).send(JSON.stringify({
+          return response.status(200).send(JSON.stringify({
             "response": results
           }));
         }
@@ -97,12 +97,12 @@ exports.deleteTag = function(request, response) {
     console.log("TC deleteTag resource", result);
 
     if (error) {
-      response.status(500).send(JSON.stringify({
+      return response.status(500).send(JSON.stringify({
         "error": error
       }));
     }
 
-    response.send(JSON.stringify({
+    return response.send(JSON.stringify({
       "response": result
     }));
   });

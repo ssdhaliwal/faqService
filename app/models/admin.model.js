@@ -16,26 +16,33 @@ Admin.getUser = function getUser(params, result) {
     }
 
     // check if params were provided
+    let sqlQuery = "";
     let sqlWhere = "";
     let sqlParam = [];
     if (params.id) {
+      sqlQuery = "SELECT firstName, lastName, email, permissionLevel from vw_users";
       sqlWhere = " where (id = ?)";
       sqlParam.push(params.id);
     } else if (params.firstName && params.lastName) {
+      sqlQuery = "SELECT firstName, lastName, email, permissionLevel from vw_users";
       sqlWhere = " where (firstName = ?) and (lastName = ?)";
       sqlParam.push(params.firstName);
       sqlParam.push(params.lastName);
+    } else if (params.email) {
+      sqlQuery = "SELECT firstName, lastName, email, permissionLevel, password from vw_users";
+      sqlWhere = " where (email = ?)";
+      sqlParam.push(params.email);
     }
 
     // execute the query and return the resutl
-    connection.query("SELECT firstName, lastName, email, permissionLevel from vw_users" + sqlWhere,
+    connection.query(sqlQuery + sqlWhere,
       sqlParam,
       function(error, answer) {
         connection.release();
 
         if (error) {
           console.log("Admin getUser error", error);
-          result(null, error);
+          result(error, null);
         } else {
           console.log("Admin getUser task", answer);
           result(null, answer);
@@ -65,7 +72,7 @@ Admin.addUser = function addUser(params, result) {
 
         if (error) {
           console.log("Admin addUser error", error);
-          result(null, error);
+          result(error, null);
         } else {
           let rowArray = Object.values(JSON.parse(JSON.stringify(rows)));
           console.log("Admin addUser task", rowArray[1][0][""]);
@@ -106,7 +113,7 @@ Admin.deleteUser = function deleteUser(params, result) {
 
         if (error) {
           console.log("Admin/M deleteUser error", error);
-          result(null, error);
+          result(error, null);
         } else {
           let rowArray = Object.values(JSON.parse(JSON.stringify(answer)));
           console.log("Admin/M deleteUser task", rowArray);

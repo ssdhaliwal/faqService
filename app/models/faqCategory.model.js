@@ -34,7 +34,7 @@ Category.getCategory = function getCategory(params, result) {
 
         if (error) {
           console.log("CC/M getCategory error", error);
-          result(null, error);
+          result(error, null);
         } else {
           console.log("CC/M getCategory task", answer);
 
@@ -65,7 +65,7 @@ Category.addCategory = function addCategory(params, result) {
 
         if (error) {
           console.log("CC/M addCategory error", error);
-          result(null, error);
+          result(error, null);
         } else {
           let rowArray = Object.values(JSON.parse(JSON.stringify(rows)));
           console.log("CC/M addCategory task", rowArray[1][0][""]);
@@ -96,7 +96,7 @@ Category.renameCategory = function renameCategory(params, result) {
 
         if (error) {
           console.log("CC/M renameCategory error", error);
-          result(null, error);
+          result(error, null);
         } else {
           let rowArray = Object.values(JSON.parse(JSON.stringify(rows)));
           console.log("CC/M renameCategory task", rowArray);
@@ -138,7 +138,7 @@ Category.deleteCategory = function deleteCategory(params, result) {
 
         if (error) {
           console.log("CC/M deleteCategory error", error);
-          result(null, error);
+          result(error, null);
         } else {
           let rowArray = Object.values(JSON.parse(JSON.stringify(answer)));
           console.log("CC/M deleteCategory task", rowArray);

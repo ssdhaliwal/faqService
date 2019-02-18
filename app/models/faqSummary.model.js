@@ -22,7 +22,7 @@ Summary.getSummary = function getSummary(params, result) {
 
         if (error) {
           console.log("SC/M getSummary error", error);
-          result(null, error);
+          result(error, null);
         } else {
           console.log("SC/M getSummary task", answer);
           result(null, answer);
