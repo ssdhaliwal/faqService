@@ -11,10 +11,14 @@ exports.getUser = function(request, response) {
     console.log("Admin resource", result);
 
     if (error) {
-      response.send(JSON.stringify({"status": 500, "error": error, "response": null}));
+      response.status(500).send(JSON.stringify({
+        "error": error
+      }));
     }
 
-    response.send(JSON.stringify({"status": 200, "error": null, "response": result}));
+    response.status(200).send(JSON.stringify({
+      "response": result
+    }));
   });
 };
 
@@ -23,19 +27,27 @@ exports.addUser = function(request, response) {
 
   // validate passed params
   if (!request.body.firstName) {
-    response.send(JSON.stringify({"status": 500, "error": "invalid firstName", "response": null}));
+    response.status(500).send(JSON.stringify({
+      "error": "invalid firstName"
+    }));
     return;
   }
   if (!request.body.lastName) {
-    response.send(JSON.stringify({"status": 500, "error": "invalid lastName", "response": null}));
+    response.status(500).send(JSON.stringify({
+      "error": "invalid lastName"
+    }));
     return;
   }
   if (!request.body.email) {
-    response.send(JSON.stringify({"status": 500, "error": "invalid email", "response": null}));
+    response.status(500).send(JSON.stringify({
+      "error": "invalid email"
+    }));
     return;
   }
   if (!request.body.password) {
-    response.send(JSON.stringify({"status": 500, "error": "invalid password", "response": null}));
+    response.status(500).send(JSON.stringify({
+      "error": "invalid password"
+    }));
     return;
   }
   request.body.permissionLevel = request.body.permissionLevel || 1;
@@ -60,10 +72,14 @@ exports.addUser = function(request, response) {
     console.log("Admin resource", result);
 
     if (error) {
-      response.send(JSON.stringify({"status": 500, "error": error, "response": null}));
+      response.status(500).send(JSON.stringify({
+        "error": error
+      }));
     }
 
-    response.send(JSON.stringify({"status": 200, "error": null, "response": result}));
+    response.status(200).send(JSON.stringify({
+      "response": result
+    }));
   });
 };
 
@@ -75,9 +91,13 @@ exports.deleteUser = function(request, response) {
     console.log("Admin resource", result);
 
     if (error) {
-      response.send(JSON.stringify({"status": 500, "error": error, "response": null}));
+      response.status(500).send(JSON.stringify({
+        "error": error
+      }));
     }
 
-    response.send(JSON.stringify({"status": 200, "error": null, "response": result}));
+    response.status(200).send(JSON.stringify({
+      "response": result
+    }));
   });
 };

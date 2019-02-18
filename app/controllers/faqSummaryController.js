@@ -10,9 +10,13 @@ exports.getSummary = function(request, response) {
     console.log("SC resource", result);
 
     if (error) {
-      response.send(JSON.stringify({"status": 500, "error": error, "response": null}));
+      response.status(500).send(JSON.stringify({
+        "error": error
+      }));
     }
 
-    response.send(JSON.stringify({"status": 200, "error": null, "response": result}));
+    response.status(200).send(JSON.stringify({
+      "response": result
+    }));
   });
 };

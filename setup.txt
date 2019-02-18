@@ -10,6 +10,9 @@ npm install --save-dev nodemon
 
 npm install --save-dev grunt grunt-contrib-watch grunt-execute
 
+npm install crypto --save
+npm install jsonwebtoken --save
+
 npm run start
 -- node server.js
 -- grunt watch

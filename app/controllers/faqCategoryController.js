@@ -10,14 +10,14 @@ exports.getCategory = function(request, response) {
     console.log("CC getCategory resource", result);
 
     if (error) {
-      response.send(JSON.stringify({
+      response.status(500).send(JSON.stringify({
         "status": 500,
         "error": error,
         "response": null
       }));
     }
 
-    response.send(JSON.stringify({
+    response.status(200).send(JSON.stringify({
       "status": 200,
       "error": null,
       "response": result
@@ -39,10 +39,8 @@ exports.addCategory = function(request, response) {
         console.log("CC addCategory resource", result);
 
         if (error) {
-          response.send(JSON.stringify({
-            "status": 500,
-            "error": error,
-            "response": null
+          response.status(500).send(JSON.stringify({
+            "error": error
           }));
         }
 
@@ -52,9 +50,7 @@ exports.addCategory = function(request, response) {
 
         // return consolidated result
         if (resultCount === 0) {
-          response.send(JSON.stringify({
-            "status": 200,
-            "error": null,
+          response.status(200).send(JSON.stringify({
             "response": results
           }));
         }
@@ -77,10 +73,8 @@ exports.renameCategory = function(request, response) {
         console.log("CC renameCategory resource", result);
 
         if (error) {
-          response.send(JSON.stringify({
-            "status": 500,
-            "error": error,
-            "response": null
+          response.status(500).send(JSON.stringify({
+            "error": error
           }));
         }
 
@@ -90,9 +84,7 @@ exports.renameCategory = function(request, response) {
 
         // return consolidated result
         if (resultCount === 0) {
-          response.send(JSON.stringify({
-            "status": 200,
-            "error": null,
+          response.status(200).send(JSON.stringify({
             "response": results
           }));
         }
@@ -109,16 +101,12 @@ exports.deleteCategory = function(request, response) {
     console.log("CC deleteCategory resource", result);
 
     if (error) {
-      response.send(JSON.stringify({
-        "status": 500,
-        "error": error,
-        "response": null
+      response.status(500).send(JSON.stringify({
+        "error": error
       }));
     }
 
-    response.send(JSON.stringify({
-      "status": 200,
-      "error": null,
+    response.status(200).send(JSON.stringify({
       "response": result
     }));
   });

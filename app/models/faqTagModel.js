@@ -1,5 +1,5 @@
 "user strict";
-var dbFaqPool = require("../dbFaq.js");
+var dbFaqPool = require("../common/dbFaq.js");
 
 //Tag object constructor
 var Tag = function(tag) {

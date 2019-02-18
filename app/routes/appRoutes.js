@@ -6,6 +6,12 @@ module.exports = function(app) {
   var faqCategoryService = require("../controllers/faqCategoryController.js");
   var faqTagService = require("../controllers/faqTagController.js");
 
+  /*
+  app.route("/login")
+    .post(userService.doLogin);
+  app.route("/logout")
+    .post(userService.doLogout);
+  */
   app.route("/admin/users")
     .get(adminService.getUser)
     .post(adminService.addUser);

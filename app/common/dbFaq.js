@@ -1,5 +1,6 @@
 "use strict";
 var mysql = require("mysql");
+var config = require("./config/app.config.js")
 
 //local mysql db connection
 var dbFaqPool = mysql.createPool({
@@ -7,9 +8,9 @@ var dbFaqPool = mysql.createPool({
   waitForConnections: true,
   queueLimit: 1000,
   multipleStatements: true,
-  host: "localhost",
-  user: "faq",
-  password: "faq!user",
+  host: config.database.faq.host,
+  user: config.database.faq.user,
+  password: config.database.faq.password,
   database: "faq"
 });
 
