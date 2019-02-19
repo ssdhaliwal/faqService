@@ -1,5 +1,4 @@
 "use strict";
-
 const CategoryTask = require("../models/faqCategory.model.js");
 
 exports.getCategory = function(request, response) {

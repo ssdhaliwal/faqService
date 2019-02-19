@@ -1,5 +1,4 @@
 "use strict";
-
 const TagTask = require("../models/faqTag.model.js");
 
 exports.getTag = function(request, response) {

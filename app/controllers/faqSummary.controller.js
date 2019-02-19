@@ -1,5 +1,4 @@
 "use strict";
-
 const SummaryTask = require("../models/faqSummary.model.js");
 
 exports.getSummary = function(request, response) {

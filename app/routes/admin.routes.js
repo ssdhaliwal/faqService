@@ -1,9 +1,7 @@
 "use strict";
-
 const config = require("../common/config/app.config.js");
 
-const authMiddleware = require("../middlewares/authorization.middleware.js");
-const adminService = require("../controllers/admin.controller.js");
+const authMiddleware = require("../middlewares/authorization.middleware.js");const adminService = require("../controllers/admin.controller.js");
 
 exports.routesConfig = function(app) {
 

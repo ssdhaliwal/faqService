@@ -1,5 +1,5 @@
 {
-  "name": "faqservice",
+  "name": "nodeService",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ssdhaliwal/faqService.git"
+    "url": "git+https://github.com/ssdhaliwal/nodeService.git"
   },
   "keywords": [
     "restful",
@@ -17,9 +17,9 @@
   "author": "seraj dhaliwal",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ssdhaliwal/faqService/issues"
+    "url": "https://github.com/ssdhaliwal/nodeService/issues"
   },
-  "homepage": "https://github.com/ssdhaliwal/faqService#readme",
+  "homepage": "https://github.com/ssdhaliwal/nodeService#readme",
   "devDependencies": {
     "grunt": "^1.0.3",
     "grunt-contrib-watch": "^1.1.0",

@@ -1,3 +1,4 @@
+"use strict";
 const config = require('./app/common/config/app.config.js');
 
 var express = require("express"),
@@ -54,8 +55,6 @@ var httpsOptions = {
     cert: fs.readFileSync("certificates/certificate.pem", "utf8")
 }
 
-console.log(httpsOptions.key);
-console.log(httpsOptions.cert);
 var httpsServer = https.createServer(httpsOptions, app).listen(httpsPort, function() {
   let host = httpsServer.address().address
   let port = httpsServer.address().port

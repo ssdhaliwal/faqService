@@ -1,5 +1,4 @@
 "use strict";
-
 const config = require("../common/config/app.config.js");
 
 const authMiddleware = require("../middlewares/authorization.middleware.js");

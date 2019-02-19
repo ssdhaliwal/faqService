@@ -1,5 +1,5 @@
-mkdir faqService
-cd faqService
+mkdir nodeService
+cd nodeService
 
 npm init
 npm install express --save
